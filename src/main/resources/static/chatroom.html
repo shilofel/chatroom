@@ -2,180 +2,336 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>小小的聊天室</title>
-<link rel="icon" href="/img/chat.ico" type="image/x-icon" />
-<link rel="stylesheet" type="text/css" href="/css/chatroom.css">
-<link rel="stylesheet" type="text/css" href="/css/common/layui.css">
-<link rel="stylesheet" type="text/css" href="/css/common/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="/css/common/fileinput.min.css">
+     <title>小小的聊天室</title>
+        <link rel="stylesheet" href="../emoji/myemojiPl.css">
+        <link rel="stylesheet" href="../layui/layer/layui.css">
+        <link rel="stylesheet" href="../dist/style.css">
 </head>
 <body>
-<div class="qqBox">
-    <div class="BoxHead">
-        <div class="headImg">
-            <img id="avatarUrl" src=""/>
+<div class="container clearfix" style="width: 1500px;margin-bottom: 200px;">
+
+    <div class="people-list" style="width: 20%;">
+        <div class="my-info">
+            <input type="file" style="display: none">
+            <img class="my-header" src="" title="" onclick="{$('.my-info input').click()}">
+            <button type="button" class="layui-btn layui-btn-xs layui-btn-normal" style="margin-left: 25%;margin-top: 5px;display: none">保存</button>
+            <div style="margin-left: 20px;margin-top: 33px;color: white;" id="news">
+                <i class="layui-icon layui-icon-username" style="font-size: 27px;cursor: pointer;"></i>
+            </div>
         </div>
-        <div id="username" class="internetName"></div>
-        <button class="close logout" onclick="logout()">&times;</button>
-    </div>
-    <div class="context">
-        <div class="conLeft">
-            <ul>
-                
+        <div class="people-info">
+            <div class="search">
+                <input type="text" placeholder="搜索" id="search">
+                <i class="fa fa-search"></i>
+            </div>
+            <div style="margin-left: 20px;margin-bottom: 3px">
+                <span>好友列表</span>
+                (<span>0</span>)
+                <button id="addFriend" type="button" class="layui-btn layui-btn-xs layui-btn-normal"
+                        style="margin-right: 29px;float: right">添加好友
+                </button>
+            </div>
+            <br>
+            <ul class="list">
+
             </ul>
         </div>
-        <div class="conRight">
-            <div class="Righthead">
-                <div class="headName"></div>
+    </div>
+
+
+    <div class="chat" style="width: 70%;display: none;">
+        <div class="chat-header clearfix">
+            <img src="" class="header-img" style="float: left" id="header">
+            <div class="chat-about">
+                <div class="chat-with"></div>
+                <div class="chat-num-messages">总消息(<span></span>)</div>
             </div>
-            <div class="RightCont">
-                <ul class="newsList-temp"></ul>
-                <ul class="newsList">
-                
-                </ul>
+        </div>
+        <!-- end chat-header -->
+        <div class="chat-history">
+            <ul>
+
+            </ul>
+
+        </div> <!-- end chat-history -->
+
+        <div class="Main" style="margin: 10px">
+            <div class="Input_Box">
+                <div contenteditable="true" class="Input_text" style="min-height: 130px"></div>
+                <div class="Input_Foot">
+                    <a class="imgBtn" id="emjio" href="javascript:void(0);" style="font-size: 20px">
+                        <img src="../emoji/emoji.png" style="width: 25px;height: 25px">
+                    </a>
+                    <input type="file" id="file" style="display:none">
+                    <!--这个不起作用,下面按钮点击触发这个input-->
+                    <a class="imgBtn" id="img" href="javascript:void(0);" onclick="{$('#file').click()}">
+                        <img src="../emoji/photo.png" style="width: 23px;height: 23px">
+                    </a>
+                    <a class="postBtn">发送</a>
+
+                </div>
             </div>
-            <div class="RightFoot">
-                <div class="emjon">
-                    <ul>
-                        <li><img src="/img/emoji/emoji_01.png"></li>
-                        <li><img src="/img/emoji/emoji_03.png"></li>
-                        <li><img src="/img/emoji/emoji_04.png"></li>
-                        <li><img src="/img/emoji/emoji_05.png"></li>
-                        <li><img src="/img/emoji/emoji_06.png"></li>
-                        <li><img src="/img/emoji/emoji_07.png"></li>
-                        <li><img src="/img/emoji/emoji_08.png"></li>
-                        <li><img src="/img/emoji/emoji_09.png"></li>
-                        <li><img src="/img/emoji/emoji_10.png"></li>
-                        <li><img src="/img/emoji/emoji_11.png"></li>
-                        <li><img src="/img/emoji/emoji_12.png"></li>
-                        <li><img src="/img/emoji/emoji_13.png"></li>
-                        <li><img src="/img/emoji/emoji_14.png"></li>
-                        <li><img src="/img/emoji/emoji_15.png"></li>
-                        <li><img src="/img/emoji/emoji_16.png"></li>
-                        <li><img src="/img/emoji/emoji_17.png"></li>
-                        <li><img src="/img/emoji/emoji_18.png"></li>
-                        <li><img src="/img/emoji/emoji_19.png"></li>
-                        <li><img src="/img/emoji/emoji_20.png"></li>
-                        <li><img src="/img/emoji/emoji_21.png"></li>
-                        <li><img src="/img/emoji/emoji_22.png"></li>
-                        <li><img src="/img/emoji/emoji_23.png"></li>
-                        <li><img src="/img/emoji/emoji_24.png"></li>
-                    </ul>
-                </div>
-                <div class="footTop">
-                    <ul>
-                        <li class="ExP">
-                            <img src="/img/emoji.jpg">
-                        </li>
-                        <li class="file-upload">
-                            <a data-toggle="modal" data-target="#upload-modal" data-backdrop="static">
-                                <img  src="/img/upload.jpg">
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="inputBox">
-                    <input id="toUserId" type="hidden">
-                    <input id="toGroupId" type="hidden">
-                    <textarea id="dope" style="width: 99%;height: 75px; border: none;outline: none;" name="" rows="" cols=""></textarea>
-                    <button title="按下回车可发送" class="sendBtn">发送</button>
-                </div>
+            <div class="faceDiv">
+                <section class="emoji_container">
+                </section>
+                <section class="emoji_tab"></section>
             </div>
         </div>
     </div>
-    
-    <div class="modal fade" id="upload-modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close" data-dismiss="modal">&times;</button>
-                    <h3 class="modal-title text-primary">文件上传</h3>
-                </div>
-                <div class="modal-body">
-                <form class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">选择文件</label>
-                        <div class="col-sm-9">
-                            <input type="file" name="file"
-                                class="col-sm-9 myfile" />
-                            <p class="help-block">注意：文件大小不超过30M，有效期为7天</p>
-                        </div>
-                    </div>
-                </form>
-                </div>
-                <div class="modal-footer">
-                        <button id="upload-cancel" class="btn btn-sm btn-muted" data-dismiss="modal">
-                        <i class="glyphicon glyphicon-remove"></i> 取消
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-</div>
+</div> <!-- end container -->
+<!-- partial -->
+<script src="../js/common/jquery-3.1.0.min.js"></script>
+<script src="../dist/handlebars.min.js"></script>
+<script src="../dist/list.min.js"></script>
+<script src="../layui/layer/layer.js"></script>
+<script src="../layui/layui.js"></script>
+<script src="../storage/cos-js-sdk-v5.js"></script>
+<script src="../storage/t.js"></script>
+<script src="../emoji/myemojiPl.js"></script>
+<script src="../js/common/jquery.cookie.js"></script>
 
 
-<script type="text/javascript" src="/js/common/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="/js/common/jquery.actual.min.js"></script>
-<script type="text/javascript" src="/js/common/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/common/fileinput.min.js"></script>
-<script type="text/javascript" src="/js/common/zh.js"></script>
-<script type="text/javascript" src="/js/chatroom.js"></script>
-<script type="text/javascript">
-    var userId;
-    var socket;   
-    var sentMessageMap;
-    
-    setUserInfo();
-    setSentMessageMap();
+<script>
 
-    if(!window.WebSocket){  
-        window.WebSocket = window.MozWebSocket;  
-    }  
-    if(window.WebSocket){
-        socket = new WebSocket("ws://192.168.1.105:8081/websocket");
-        socket.onmessage = function(event){  
-            var json = JSON.parse(event.data);    
-            if (json.status == 200) {
-                var type = json.data.type;
-                console.log("收到一条新信息，类型为：" + type);
-                switch(type) {
-                    case "REGISTER":
-                        ws.registerReceive();
-                        break;
-                    case "SINGLE_SENDING":
-                        ws.singleReceive(json.data);
-                        break;
-                    case "GROUP_SENDING":   
-                        ws.groupReceive(json.data);
-                        break;
-                    case "FILE_MSG_SINGLE_SENDING":
-                        ws.fileMsgSingleRecieve(json.data);
-                        break;
-                    case "FILE_MSG_GROUP_SENDING":
-                        ws.fileMsgGroupRecieve(json.data);
-                        break;
-                    default:
-                        console.log("不正确的类型！");
+
+    var token = $.cookie("token");
+
+    var log=$.ajax({
+        url: "/parseToken",
+        type: 'post',
+        data: {
+            token,
+
+        },
+        async: false,
+        success: function (data) {
+            return data
+        }
+    }).responseText
+
+    var u  = JSON.parse(log)
+
+
+    $(function () {
+        $('.my-header').attr("src",u['header_img']);
+        $('.my-info img').attr("title",u['nick_name']);
+    })
+</script>
+
+<script>
+
+
+    //这个f存储好友信息
+    var f = {};
+    //这个o存储申请好友列表
+    var o = [];
+    $(function () {
+        $.ajax({
+            url: '/getFriends_action',
+            type: 'post',
+            dataType: 'json',
+            data: {user_id: u['username']},
+            success: function (data) {
+                $('.people-info span').eq(1).html(data.length);
+                for (var i = 0; i < data.length; i++) {
+                    $('.people-list .list').append(getPeopleHtml(data[i]))
                 }
-            } else {
-                alert(json.msg);
-                console.log(json.msg);
+                f = data;
             }
-        };  
-     
-        // 连接成功1秒后，将用户信息注册到服务器在线用户表
-        socket.onopen = setTimeout(function(event){ 
-              console.log("WebSocket已成功连接！");
-              ws.register();
-        }, 1000)  
-     
-        socket.onclose = function(event){  
-              console.log("WebSocket已关闭...");  
-        };  
-    } else {  
-          alert("您的浏览器不支持WebSocket！");  
+        });
+
+        $.ajax({
+            url: '/getApplyFriend_action',
+            type: 'post',
+            data: {friend_id: u['username']},
+            success: function (data) {
+                var l = 0;
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i]['isaccept'] === 0) {
+                        l++;
+                    }
+                }
+                if (l !== 0) {
+                    $('#news').append('<span class="layui-badge">' + l + '</span>');
+                }
+                o = data;
+            }
+        });
+    });
+
+    $('#addFriend').click(function () {
+        layer.open({
+            type: 1,
+            title: '添加好友',
+            area: ['500px', '400px'],
+            content: '<div class="layui-input-inline" style="margin-left: 32%;margin-top: 20px">\n' +
+                '<input id="key" type="text" placeholder="输入对方id或昵称" class="layui-input" style="height: 30px;">\n' +
+                '</div><button onclick="searchUser()" type="button" class="layui-btn layui-btn-xs layui-btn-normal" style="margin-top: 20px;margin-left: 5px">查找</button>' +
+                '<div id="userList"></div>'
+        });
+    });
+
+    function searchUser() {
+        var key = $('#key').val();
+        if (key === '' || key === null) {
+            layer.msg('key不能为空!');
+            return;
+        }
+        $.ajax({
+            url: '/searchUser_action',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                key: $('#key').val(),
+            },
+            success: function (data) {
+                $('#userList').empty();
+                if (data.length === 0) {
+                    $('#userList').append('<img src="../nodata.png" style="margin-left: 25%">');
+                    return;
+                }
+                for (var i = 0; i < data.length; i++) {
+                    $('#userList').append('<div style="margin-top: 10px" id="user-' + data[i]['username'] + '"><div style="width: 90%;height: 70px;margin-left: 25px;border: solid 1px rgb(236,237,237)">' +
+                        '<img src="' + data[i]['header_img'] + '" style="width: 50px;height: 50px;margin-top: 10px;float: left;margin-left: 15px">' +
+                        '<div style="float: left;display: inline-block;margin-top: 15px;margin-left: 15px;height: 40px;width: 75%"><span style="font-size: 20px">' + data[i]['nickname'] + '</span><span>(' + data[i]['username'] + ')</span><br>' +
+                        '<span style="color: grey">请输入添加理由(可空)&nbsp;</span><input><button type="button" class="layui-btn layui-btn-xs layui-btn-normal" style="float: right" onclick="addAction(\'' + data[i]['username'] + '\')">添加</button>' + '</div>' +
+                        '</div>' +
+                        '</div>')
+                }
+            }
+        });
     }
+    function addAction(t) {
+        if (t === u['username']) {
+            layer.msg("你不能添加你自己!", {icon: 2, time: 2000});
+            return;
+        }
+
+        $.ajax({
+            url: '/addFriend_action',
+            type: 'post',
+            data: {
+                user_id: u['username'],
+                friend_id: t,
+                reason: $('#user-' + t + ' input').val(),
+                ctime: getCurrentTime(),
+                type: 0
+            },
+            success: function () {
+                layer.msg("已发送请求!", {icon: 1, time: 2000});
+            }, error: function () {
+                layer.msg("错误!", {icon: 2, time: 2000});
+            }
+        });
+    }
+    $('#news i').click(function () {
+        var html = '', exp;
+        for (var i = 0; i < o.length; i++) {
+            exp = o[i]['isaccept'] === 0 ? ('<span style="cursor: pointer;color: #1E9FFF;float: right" onclick="acceptAction(\'' + o[i]['user_id'] + '\')">同意</span>') :
+                ('<span style="color: grey;float: right">已同意</span>');
+            html += '<div style="margin-top: 10px" id="apply-' + o[i]['user_id'] + '"><div style="margin-left: 15px;margin-bottom: 5px;color: rgb(122,124,126)">' + o[i]['ctime'] + '</div><div style="width: 90%;display: inline-block;margin-left: 15px;border: solid 1px rgb(236,237,237)">' +
+                '<img src="' + o[i]['user_header_img'] + '" style="width: 50px;height: 50px;border-radius: 50%;margin-top: 10px;float: left;margin-left: 10px">' +
+                '<div style="float: left;display: inline-block;margin-top: 15px;margin-left: 15px;margin-bottom: 10px;width: 75%" class="apply-info"><span style="font-size: 20px">' + o[i]['user_nick_name'] + '</span><span>(' + o[i]['user_id'] + ')</span><br>' +
+                '<span style="color: rgb(122,124,126)">附加信息：' + o[i]['reason'] + '</span><br><span>申请添加你为好友</span>' + exp + '</div>' +
+                '</div></div>'
+        }
+        if (o.length === 0) {
+            html += '<img src="../nodata.png" style="margin-left: 19%">'
+        }
+        layer.open({
+            type: 1,
+            title: '申请列表',
+            area: ['400px', '500px'],
+            content: '<div style="margin-top: 10px" id="applyList">' + html + '</div>'
+        });
+
+    });
+
+    function acceptAction(t) {
+        $.ajax({
+            url: '/acceptFriend_action',
+            type: 'post',
+            data: {
+                user_id: u['username'],
+                friend_id: t,
+                ctime: getCurrentTime(),
+                reason: '',
+                type: 1
+            },
+            success: function () {
+                $('#apply-' + t + ' .apply-info span').eq(4).remove();
+                $('#apply-' + t + ' .apply-info').append('<span style="color: grey;float: right">已同意</span>');
+                layer.msg("已同意!", {icon: 1, time: 2000});
+            }, error: function () {
+                layer.msg("错误!", {icon: 2, time: 2000});
+            }
+        });
+    }
+
+    function getPeopleHtml(t) {//直接拼接字符串简单快速
+        //这里判断有没有未读信息
+        var c = t['notread_num'] === 0 ? ('<span class="layui-badge" style="display: none">' + t['notread_num'] + '</span>') : ('<span class="layui-badge">' + t['notread_num'] + '</span>');
+        var html = '<li class="clearfix" onclick="initChatRecord(' + JSON.stringify(t).replace(/\"/g, "'") + ')" id="friend-id-' + t['friend_id'] + '" style="cursor: pointer;">\n' +
+            '                <div class="border-about">' +
+            '                <img class="header-img" src="' + t['friend_header_img'] + '" title="' + t['friend_id'] + '">\n' +
+            '                <div class="about">\n' +
+            '                    <div class="name">' + c + '&nbsp;&nbsp;' + t['friend_nick_name'] + '</div>\n' +
+            '                    <div class="status">\n' +
+            '                    <span class="layui-badge-dot"></span><span class="isonline">&nbsp;离线&nbsp;</span><span class="msg"></span>\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '                </div>\n' +
+            '        </li>';
+        return html;
+    }
+
+    function getMsgHtml(t, k) {
+        //这里t是信息记录,k识别主体,l存对方名称和头像
+        var html = k === 0 ? '<li class="clearfix">\n' +
+            '                    <div class="message-data align-right">\n' +
+            '                        <div class="message-data">\n' +
+            '                            <span class="message-data-time">' + t['ctime'] + '</span>\n' +
+            '                            <span class="message-data-name">' + u['nick_name'] + '&nbsp;<i class="fa fa-circle online"></i></span>\n' +
+            '                        </div>\n' +
+            '                        <img class="header-img" src="' + u['header_img'] + '" style="float: right;margin-left: 10px;">\n' +
+            '                        <div class="message my-message" style="float: right">' + t['content'] + '</div>\n' +
+            '                    </div>\n' +
+            '                </li><br>'
+            :
+            '<li class="clearfix">\n' +
+            '                    <div class="message-data align-left">\n' +
+            '                        <div class="message-data">\n' +
+            '                            <span class="message-data-name"><i class="fa fa-circle online"></i>&nbsp;' + l['friend_nick_name'] + '</span>\n' +
+            '                            <span class="message-data-time">' + t['ctime'] + '</span>\n' +
+            '                        </div>\n' +
+            '                        <img class="header-img" src="' + l['friend_header_img'] + '" style="float: left;margin-right: 10px">\n' +
+            '                        <div class="message other-message" style="float: left">' + t['content'] + '</div>\n' +
+            '                    </div>\n' +
+            '                </li><br>';
+        return html;
+    }
+    //获取当前时间
+    function getCurrentTime() {
+        var d = new Date();
+        var year = d.getFullYear();
+        var month = change(d.getMonth() + 1);
+        var day = change(d.getDate());
+        var hour = change(d.getHours());
+        var minute = change(d.getMinutes());
+        var second = change(d.getSeconds());
+        function change(t) {
+            if (t < 10) {
+                return "0" + t;
+            } else {
+                return t;
+            }
+        }
+        return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+    }
+
+
+
+
     
 </script>
 

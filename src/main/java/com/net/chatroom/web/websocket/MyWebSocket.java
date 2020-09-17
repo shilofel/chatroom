@@ -15,7 +15,7 @@ import javax.websocket.server.ServerEndpoint;
 public class MyWebSocket {
     //与某个客户端的连接会话，需要通过它来给客户端发送数据
     private Session session;
-    private String userId;
+    private String user_Id;
 
     private static ChatService chatService;
 

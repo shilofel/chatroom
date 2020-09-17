@@ -90,7 +90,12 @@
                  contentType: 'application/x-www-form-urlencoded',//
                  dataType: 'json',
                  success: function (sign) {   //sign被JSON解析
-                     msgNotify("success","注册成功!");
+                     if(sign.msg=="用户名已存在")
+                         alert("用户名已存在")
+                     else if(sign.msg=="注册失败")
+                         alert("服务器错误，注册失败")
+                     else
+                          msgNotify("success","注册成功!");
                      setTimeout(function () {
                          window.location.href="index.html"
                      },3000)

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -18,10 +20,8 @@ public class SecurityController {
     
     @RequestMapping(value = "/logining", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseJson login(HttpSession session,
-            @RequestParam String username,
-            @RequestParam String password) {
-        return securityService.login(username, password, session);
+    public ResponseJson login(HttpServletRequest request, HttpServletResponse response) {
+        return securityService.login(request,response);
     }
     
     @RequestMapping(value = "/logout", method = RequestMethod.POST)

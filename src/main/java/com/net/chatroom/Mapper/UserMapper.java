@@ -16,4 +16,8 @@ public interface UserMapper {
     UserInfo checkIsExist(String username);
     @Insert("INSERT INTO user_info(username,password,nick_name) "+"VALUES(#{username},#{password},#{nickname})")
     boolean insertUser(UserInfo user);
+    @Select("SELECT username,header_img,nick_name FROM user_info WHERE username=#{username}")
+    UserInfo queryUserInfo(UserInfo user);
+
+
 }

@@ -10,8 +10,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.text.MessageFormat;
+import com.net.chatroom.util.JWT;
 
 
 @Service
@@ -24,7 +28,10 @@ public class SecurityServiceImpl implements SecurityService {
     
     
     @Override
-    public ResponseJson login(String username, String password, HttpSession session) {
+    public ResponseJson login(HttpServletRequest request, HttpServletResponse response) {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String isRemeber = request.getParameter("isRemember");
         UserInfo user=new UserInfo();
         user.setUsername(username);
         UserInfo userInfo = UserMapper.getUserByUsername(user);
@@ -34,7 +41,10 @@ public class SecurityServiceImpl implements SecurityService {
         if (!userInfo.getPassword().equals(password)) {
             return new ResponseJson().error("密码不正确");
         }
-        session.setAttribute(Constant.USER_TOKEN, userInfo.getUserId());
+        String token = JWT.createToken(user.getUsername());
+        Cookie cookie = new Cookie("token",token);
+        cookie.setPath("/");
+        response.addCookie(cookie);
         System.out.println(new ResponseJson().success());
         return new ResponseJson().success();
     }

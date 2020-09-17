@@ -8,6 +8,7 @@ public class UserInfo {
     private String username;
     private String password;
     private String nickname;
+    private String head_img;
 
     public String getNickname() {
         return nickname;
@@ -17,20 +18,29 @@ public class UserInfo {
         this.nickname = nickname;
     }
 
-    private String avatarUrl;
+
     private List<UserInfo> friendList;
+
+    public String getHead_img() {
+        return head_img;
+    }
+
+    public void setHead_img(String head_img) {
+        this.head_img = head_img;
+    }
+
     private List<GroupInfo>groupList;
     
     public UserInfo() {
         super();
     }
 
-    public UserInfo(String userId, String username, String password, String nickname, String avatarUrl, List<UserInfo> friendList, List<GroupInfo> groupList) {
+    public UserInfo(String userId, String username, String password, String nickname, String head_img, List<UserInfo> friendList, List<GroupInfo> groupList) {
         this.userId = userId;
         this.username = username;
         this.password = password;
         this.nickname = nickname;
-        this.avatarUrl = avatarUrl;
+        this.head_img=head_img;
         this.friendList = friendList;
         this.groupList = groupList;
     }
@@ -53,13 +63,9 @@ public class UserInfo {
     public void setPassword(String password) {
         this.password = password;
     }
-    public String getAvatarUrl() {
-        return avatarUrl;
-    }
 
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
-    }
+
+
 
     public List<UserInfo> getFriendList() {
         return friendList;
