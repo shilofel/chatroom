@@ -1,0 +1,31 @@
+DROP database if EXISTS chatdb;
+CREATE database if not EXISTS chatdb CHARACTER SET utf8;
+
+CREATE TABLE `chatdb`.`chat_records` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `sender_id` VARCHAR(45) NOT NULL,
+  `receiver_id` VARCHAR(45) NOT NULL,
+  `content` TEXT NOT NULL,
+  `ctime` VARCHAR(45) NOT NULL,
+  `isread` INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)) DEFAULT CHARSET=utf8;
+
+CREATE TABLE `chatdb`.`user_info` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `nick_name` VARCHAR(45) NOT NULL,
+  `header_img` VARCHAR(500) NOT NULL DEFAULT 'staticfiles/defaultImg.jpg',
+  `ctime` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`, `username`)) DEFAULT CHARSET=utf8;
+
+CREATE TABLE `chatdb`.`friends` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` VARCHAR(45) NOT NULL,
+  `friend_id` VARCHAR(45) NOT NULL,
+  `ctime` VARCHAR(45) NOT NULL,
+  `isaccept` INT NOT NULL DEFAULT 0,
+  `reason` TEXT NULL,
+  `type` INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)) DEFAULT CHARSET=utf8;
+

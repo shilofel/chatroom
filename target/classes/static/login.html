@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>登陆</title>
+    <link rel="stylesheet" type="text/css" href="staticfiles/login/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="staticfiles/login/css/my-login.css">
+<style>
+    body {
+        background:url("staticfiles/login/img/chat_bg.jpg");
+    }
+</style>
+
+</head>
+<body class="my-login-page">
+<section class="h-100">
+
+    <div class="container h-100">
+        <div class="row justify-content-md-center h-100">
+            <div class="card-wrapper">
+                <div class="brand">
+                    <img src="staticfiles/login/img/chat.ico">
+                </div>
+                <div class="card fat">
+                    <div class="card-body">
+                        <h2 class="card-title" align="center">登录</h2>
+
+                        <div class="form-group">
+                            <label for="username">账号</label>
+                            <input id="username" type="text" class="form-control" required autofocus>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">密码</label>
+                            <input id="password" type="password" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                <a href="#" class="float-right">
+                                    忘记密码?
+                                </a>
+                            </label>
+                        </div>
+
+                        <div class="form-group no-margin">
+                            <button id="login" type="submit" class="btn btn-primary btn-block">
+                                登录
+                            </button>
+                        </div>
+                        <div class="margin-top20 text-center">
+                            Don't have an account? <a href="register.html">Create One</a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>&copy; 2020 SEU CSC ZC_WZH, All Rights Reserved </p>
+    </div>
+</section>
+
+<script src="staticfiles/jquery-3.1.0.min.js"></script>
+<script src="staticfiles/login/js/my-login.js"></script>
+<script src="staticfiles/login/js/message.js"></script>
+<script src="staticfiles/jquery.cookie.js"></script>
+<script>
+
+    $('#login').click(function () {
+        $.ajax({
+            url: "/api/login_action",
+            type: "post",
+            dataType:"json",
+            data: {
+                "username": $('#username').val(),
+                "password": $('#password').val(),
+                "isRemember":$('#remember').is(':checked')
+            }, success: function (data) {
+                if (!data){
+                    $.message({
+                        type:'error',
+                        message:'<div style="color:#333;font-weight:bold;font-size:16px;">账号或密码错误<div>' +
+                            '<span style="color:lightgrey;font-size:small;">3秒后自动关闭</span>',
+                        duration:3000
+                    })
+                }else {
+                    window.location.href="chatWidget.html"
+                }
+            },error:function () {
+                $.message({
+                    type:'error',
+                    message:'<div style="color:#333;font-weight:bold;font-size:16px;">服务器错误<div>' +
+                        '<span style="color:lightgrey;font-size:small;">3秒后自动关闭</span>',
+                    duration:3000
+                })
+            }
+        })
+    })
+
+
+</script>
+</body>
+</html>>
